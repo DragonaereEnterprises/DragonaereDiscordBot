@@ -4,6 +4,7 @@ const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const admin = require("firebase-admin");
 const { initializeApp } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
+const express = require('express')
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -50,5 +51,19 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+
+const app = express()
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.get('/health', (req, res) => {
+  res.sendStatus(200);
+})
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Listening on port 3000 or ${process.env.PORT}`)
+})
 
 client.login(process.env.DISCORD_TOKEN);
