@@ -1,5 +1,7 @@
 import { CommandInteraction, Client, Interaction, PermissionsBitField } from "discord.js";
 import { Commands } from "../Commands"
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default (client: Client): void => {
 	client.on("interactionCreate", async (interaction: Interaction) => {
@@ -12,16 +14,18 @@ export default (client: Client): void => {
 
 const handleSlashCommand = async (client: Client, interaction: CommandInteraction): Promise<void> => {
   const slashCommand = Commands.find(c => c.name === interaction.commandName);
-  if (!slashCommand) {
+  if (!slashCommand || !interaction.channel || !interaction.channel.isDMBased){
     interaction.followUp({ content: "An error has occurred" });
     return;
   }
-  let userId = interaction.user.id;
-  // @ts-ignore
-  if (slashCommand.ownerOnly === true && userId != 249288094233133059n)
+  if (interaction.member === null){
+    interaction.followUp({content:"You must be a member of this server"});
+    return;
+  }
+  if (slashCommand.ownerOnly === true && interaction.user.id != process.env.OWNER_ID)
     interaction.followUp({ content: "You must be the Bot Owner to run this Command" });
-  // @ts-ignore
-  if (slashCommand.adminOnly === true && !interaction.member?.permissions.has(PermissionsBitField.Flags.Administrator))
+    // @ts-expect-error
+  if (slashCommand.adminOnly === true && !interaction.member.permissions.has(PermissionsBitField.Flags.Administrator))
     interaction.followUp({ content: "You must be a Server Admin to run this Command" });
 
   await interaction.deferReply({ ephemeral: false });

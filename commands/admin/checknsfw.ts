@@ -10,7 +10,9 @@ export const CheckNSFW: Command = {
   run: async (client: Client, interaction: CommandInteraction) => {
     const nsfwLevel = interaction.guild?.nsfwLevel;
     const nsfwLevelName = ["Default", "Explicit", "Safe", "Age Restricted"];
-    // @ts-ignore
+    if (nsfwLevel === undefined)
+      return await interaction.followUp({ content: `An Error has Occured`, ephemeral: true });
+
     await interaction.followUp({ content: `NSFW Level: ${nsfwLevelName[nsfwLevel]}`, ephemeral: true });
   },
 };
