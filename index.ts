@@ -1,5 +1,6 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import http from 'http';
+import { ReacordDiscordJs } from "reacord"
 import dotenv from 'dotenv';
 dotenv.config({path: '.env.dev'});
 
@@ -13,8 +14,10 @@ const client = new Client({ intents: [
   GatewayIntentBits.GuildMessages
 ] });
 
+const reacord = new ReacordDiscordJs(client)
+
 ready(client);
-interactionCreate(client);
+interactionCreate(client, reacord);
 
 const server = http.createServer((req, res) => {
   res.writeHead(200);

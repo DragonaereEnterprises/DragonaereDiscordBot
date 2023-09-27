@@ -1,5 +1,6 @@
 import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../command";
+import { ReacordDiscordJs } from "reacord";
 
 export const CoinFlip: Command = {
   adminOnly: false,
@@ -7,7 +8,7 @@ export const CoinFlip: Command = {
   category: "fun",
   name: 'coinflip',
   description: 'Flip a coin',
-  run: async (client: Client, interaction: CommandInteraction) => {
+  run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {
     function generateResponse() {
       let flipVariable = Math.random();
       if (flipVariable < .5) {
@@ -17,6 +18,6 @@ export const CoinFlip: Command = {
         return 'Tails'
       }
     }
-    await interaction.followUp({ content : `${generateResponse()}`});
+    await reacord.reply(interaction, `${generateResponse()}`);
   }
 };
