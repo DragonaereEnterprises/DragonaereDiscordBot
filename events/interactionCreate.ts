@@ -29,5 +29,5 @@ const handleSlashCommand = async (client: Client, interaction: CommandInteractio
   if (slashCommand.adminOnly === true && !interaction.member.permissions.has(PermissionsBitField.Flags.Administrator))
     reacord.reply(interaction, "You must be a Server Admin to run this Command");
 
-  slashCommand.run(client, interaction);
+  slashCommand.run(client, interaction, reacord);
 };
