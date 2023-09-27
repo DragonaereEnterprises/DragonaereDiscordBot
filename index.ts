@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import http from 'http';
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({path: '.env.dev'});
 
 import ready from "./events/ready";
 import interactionCreate from "./events/interactionCreate";
