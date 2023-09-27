@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits } from 'discord.js';
-import express, { Application, Response } from "express";
+import http from 'http';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,20 +16,13 @@ const client = new Client({ intents: [
 ready(client);
 interactionCreate(client);
 
-const app: Application = express();
-
-app.get("/",(res: Response) => {
-  res.status(200).send({
-    message: "Hello World!",
-  });
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end('OK');
 });
 
-app.get('/health', (res: Response) => {
-  res.status(200);
-})
-
-app.listen(3000, () => {
-  console.log('Listening on port 3000')
-})
+server.listen(3000, () => {
+  console.log('Server listening on port 3000...');
+});
 
 client.login(process.env.DISCORD_TOKEN);
