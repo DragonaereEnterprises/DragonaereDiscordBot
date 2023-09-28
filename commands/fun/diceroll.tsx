@@ -1,6 +1,7 @@
 import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
+import React from "react";
 
 export const DiceRoll: Command = {
   adminOnly: false,
@@ -13,6 +14,6 @@ export const DiceRoll: Command = {
       let numberReturned = Math.floor(Math.random() * 6) + 1;
       return numberReturned;
     }
-    await reacord.reply(interaction, `**${generateResponse()}**`);
+    reacord.reply(interaction, <p>**${generateResponse()}**</p>);
   },
 };

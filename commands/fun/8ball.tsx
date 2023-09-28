@@ -1,6 +1,7 @@
 import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
+import React from "react";
 
 export const EightBall: Command = {
   adminOnly: false,
@@ -25,6 +26,6 @@ export const EightBall: Command = {
         let arrayNumber = Math.floor(Math.random()*20);
         return responses[arrayNumber]
     }
-    await reacord.reply(interaction, `**Question:** ${questionString}\n**Answer:** ${generateResponse()}`);
+    reacord.reply(interaction, <p>**Question:** ${questionString}<br />**Answer:** ${generateResponse()}`</p>);
   },
 };

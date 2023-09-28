@@ -1,6 +1,7 @@
 import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
+import React from "react";
 
 export const CoinFlip: Command = {
   adminOnly: false,
@@ -18,6 +19,6 @@ export const CoinFlip: Command = {
         return 'Tails'
       }
     }
-    await reacord.reply(interaction, `${generateResponse()}`);
+    reacord.reply(interaction, <p>**${generateResponse()}**</p>);
   }
 };

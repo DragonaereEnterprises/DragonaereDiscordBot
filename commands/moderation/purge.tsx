@@ -1,7 +1,8 @@
 import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
-const ms = require("ms");
+import React from "react";
+import ms from "ms";
 
 export const Purge: Command = {
   adminOnly: true,
@@ -19,14 +20,10 @@ export const Purge: Command = {
     },
   ],
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {
-    if (!interaction.channel?.isDMBased){
-      reacord.reply(interaction, "An error has occurred");
-      return;
-    }
-    // @ts-expect-error
-    const amount = interaction.options.getInteger('number')
+    if (!interaction.isChatInputCommand()) return
+    const amount = interaction.options.getInteger('number', true)
     if (amount > 100) 
-      return reacord.ephemeralReply(interaction, `You can only purge 100 messages at a time.`);
+      return reacord.ephemeralReply(interaction, <p>You can only purge 100 messages at a time.</p>);
     const messages = await interaction.channel?.messages.fetch({ 
         limit: amount + 1,
     });
@@ -34,9 +31,9 @@ export const Purge: Command = {
       (msg) => Date.now() - msg.createdTimestamp < ms("14 days")
     );
     if (filtered === undefined)
-      return reacord.ephemeralReply(interaction, 'An error has occured');
-    await reacord.ephemeralReply(interaction, `Purged ${filtered.size - 1} messages.`);
+      return reacord.ephemeralReply(interaction, <p>An error has occured</p>);
+    reacord.ephemeralReply(interaction, <p>Purged ${filtered.size - 1} messages.</p>);
     // @ts-expect-error
-    await interaction.channel?.bulkDelete(filtered)
+    await interaction.channel?.bulkDelete(filtered);
   },
 };
