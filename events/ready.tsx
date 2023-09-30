@@ -1,7 +1,8 @@
 import { Client } from "discord.js";
 import { Commands } from "../Commands";
+import { LavalinkManager } from "lavalink-client/dist/types";
 
-export default (client: Client): void => {
+export default (client: Client, lavalink: LavalinkManager): void => {
     client.on("ready", async () => {
         if (!client.user || !client.application) {
             return;
@@ -25,5 +26,7 @@ export default (client: Client): void => {
           const status = statuses[Math.floor(Math.random() * statuses.length)];
           client.user?.setActivity(status.name, { type: status.type });
         }, 60000);
+
+        await lavalink.init({ ...client.user! }); 
     });
 };

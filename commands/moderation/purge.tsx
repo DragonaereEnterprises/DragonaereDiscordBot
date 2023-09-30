@@ -1,5 +1,5 @@
-import { CommandInteraction, Client, TextBasedChannel } from "discord.js";
-import { Command } from "../../command";
+import { CommandInteraction, Client, TextChannel } from "discord.js";
+import { Command } from "../../types";
 import { ReacordDiscordJs } from "reacord";
 import { EmbedMessage, EmbedError, EmbedDefaultError } from "../../components/Embed";
 import React from "react";
@@ -21,7 +21,7 @@ export const Purge: Command = {
     },
   ],
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {
-    const channel = interaction.channel as TextBasedChannel;
+    const channel = interaction.channel as TextChannel;
     if (!channel.isDMBased) return
     if (!interaction.isChatInputCommand()) return
     const amount = interaction.options.getInteger('number', true)
@@ -36,7 +36,6 @@ export const Purge: Command = {
     if (filtered === undefined)
       return reacord.ephemeralReply(interaction, <EmbedDefaultError />);
     reacord.ephemeralReply(interaction, <EmbedMessage title="Purge" description={`Purged ${filtered.size - 1} messages.`} />);
-    // @ts-ignore
     await channel.bulkDelete(filtered);
   },
 };

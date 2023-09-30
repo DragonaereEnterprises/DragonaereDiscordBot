@@ -1,5 +1,5 @@
 import { CommandInteraction, Client } from "discord.js";
-import { Command } from "../../command";
+import { Command } from "../../types";
 import { ReacordDiscordJs, Embed, Button } from "reacord";
 import React from "react";
 
@@ -8,8 +8,8 @@ function HelpEmbed(){
 	return (
 		<Embed
 			title="Help"
-			description="Hahaha broken..."
-			color={0x00ff00}
+			description="Stop it. Get some help."
+			color={0xf46904}
 			timestamp={Date.now()}
 		/>
 	)

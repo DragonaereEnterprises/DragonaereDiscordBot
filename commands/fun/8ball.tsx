@@ -1,5 +1,5 @@
 import { CommandInteraction, Client, CommandInteractionOptionResolver } from "discord.js";
-import { Command } from "../../command";
+import { Command } from "../../types";
 import { ReacordDiscordJs } from "reacord";
 import { EmbedMessage } from "../../components/Embed";
 import React from "react";
@@ -16,7 +16,6 @@ export const EightBall: Command = {
       description: 'What do you want to ask the 8Ball?',
       required: true,
       type: 3,
-
     },
   ],
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {

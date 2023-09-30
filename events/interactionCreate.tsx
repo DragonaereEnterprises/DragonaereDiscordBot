@@ -4,18 +4,19 @@ import { ReacordDiscordJs } from "reacord";
 import { EmbedError } from "../components/Embed";
 import React from "react";
 import dotenv from 'dotenv';
+import { LavalinkManager } from "lavalink-client/dist/types";
 dotenv.config();
 
-export default (client: Client, reacord: ReacordDiscordJs): void => {
+export default (client: Client, reacord: ReacordDiscordJs, lavalink: LavalinkManager): void => {
 	client.on("interactionCreate", async (interaction: Interaction) => {
 
     if (interaction.isCommand() || interaction.isContextMenuCommand()) {
-      await handleSlashCommand(client, interaction, reacord);
+      await handleSlashCommand(client, interaction, reacord, lavalink);
     }
   });
 }
 
-const handleSlashCommand = async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs): Promise<void> => {
+const handleSlashCommand = async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs, lavalink: LavalinkManager): Promise<void> => {
   const member = interaction.member as GuildMember;
   const slashCommand = Commands.find(c => c.name === interaction.commandName);
   if (!slashCommand || !interaction.channel || !interaction.channel.isDMBased){
@@ -35,5 +36,5 @@ const handleSlashCommand = async (client: Client, interaction: CommandInteractio
     return;
   }
 
-  slashCommand.run(client, interaction, reacord);
+  slashCommand.run(client, interaction, reacord, lavalink);
 };

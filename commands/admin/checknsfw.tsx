@@ -1,5 +1,5 @@
 import { CommandInteraction, Client } from "discord.js";
-import { Command } from "../../command";
+import { Command } from "../../types";
 import { ReacordDiscordJs } from "reacord";
 import { EmbedMessage } from "../../components/Embed";
 import React from "react"

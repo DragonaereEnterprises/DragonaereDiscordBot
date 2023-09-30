@@ -1,22 +1,25 @@
-import { Embed } from "reacord"
+import { Embed, EmbedFooterProps, EmbedProps, EmbedThumbnailProps } from "reacord"
 import React from "react"
 
 
-export function EmbedMessage({title, description}: any) {
+export function EmbedMessage({title, description, url, thumbnail, footer}: {title: string, description?: string, url?: string | undefined, thumbnail?: {url: string} | undefined, footer?: {text: string, iconUrl: string | undefined}| undefined }) {
 	return (
 		<Embed
 			title={title}
 			description={description}
+      url={url}
+      thumbnail={thumbnail}
+      footer={footer}
 			color={0xF46904}
 			timestamp={Date.now()}
 		/>
 	)
 }
 
-export function EmbedError({description}: any) {
+export function EmbedError({title = "error", description}: any) {
 	return (
 		<Embed
-			title="Error"
+			title={title}
 			description={description}
 			color={0xF40000}
 			timestamp={Date.now()}

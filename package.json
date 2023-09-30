@@ -17,6 +17,7 @@
     "dotenv": "^16.3.1",
     "firebase": "^10.3.1",
     "firebase-admin": "^11.10.1",
+    "lavalink-client": "^1.1.21",
     "reacord": "^0.5.2",
     "react": "^18.2.0",
     "ts-node": "^10.9.1",
