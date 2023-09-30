@@ -1,7 +1,8 @@
 import { Embed } from "reacord"
 import React from "react"
-//@ts-expect-error
-export function EmbedMessage({title, description}) {
+
+
+export function EmbedMessage({title, description}: any) {
 	return (
 		<Embed
 			title={title}
@@ -11,8 +12,8 @@ export function EmbedMessage({title, description}) {
 		/>
 	)
 }
-//@ts-expect-error
-export function EmbedError({description}) {
+
+export function EmbedError({description}: any) {
 	return (
 		<Embed
 			title="Error"

@@ -1,7 +1,7 @@
-import { CommandInteraction, Client, Interaction, PermissionsBitField } from "discord.js";
+import { CommandInteraction, Client, Interaction, PermissionsBitField, GuildMember } from "discord.js";
 import { Commands } from "../Commands"
 import { ReacordDiscordJs } from "reacord";
-import { EmbedMessage, EmbedError } from "../components/Embed";
+import { EmbedError } from "../components/Embed";
 import React from "react";
 import dotenv from 'dotenv';
 dotenv.config();
@@ -16,6 +16,7 @@ export default (client: Client, reacord: ReacordDiscordJs): void => {
 }
 
 const handleSlashCommand = async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs): Promise<void> => {
+  const member = interaction.member as GuildMember;
   const slashCommand = Commands.find(c => c.name === interaction.commandName);
   if (!slashCommand || !interaction.channel || !interaction.channel.isDMBased){
     reacord.ephemeralReply(interaction, <EmbedError description="An error has occurred" />);
@@ -27,8 +28,7 @@ const handleSlashCommand = async (client: Client, interaction: CommandInteractio
   }
   if (slashCommand.ownerOnly === true && interaction.user.id != process.env.OWNER_ID)
     reacord.ephemeralReply(interaction, <EmbedError description="You must be the Bot Owner to run this Command" />);
-    // @ts-expect-error
-  if (slashCommand.adminOnly === true && !interaction.member.permissions.has({ checkAdmin: true }))
+  if (slashCommand.adminOnly === true && !member.permissions.has(PermissionsBitField.Flags.Administrator))
     reacord.ephemeralReply(interaction, <EmbedError description="You must be a Server Admin to run this Command" />);
 
   slashCommand.run(client, interaction, reacord);

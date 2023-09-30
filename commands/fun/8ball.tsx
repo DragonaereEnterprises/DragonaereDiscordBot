@@ -1,4 +1,4 @@
-import { CommandInteraction, Client } from "discord.js";
+import { CommandInteraction, Client, CommandInteractionOptionResolver } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
 import { EmbedMessage } from "../../components/Embed";
@@ -21,8 +21,8 @@ export const EightBall: Command = {
   ],
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {
     const responses = ["42", "It is certain", "Reply hazy, try again","Don’t count on it", "It is decidedly so","Ask again later","My reply is no","Without a doubt","Better not tell you now",	"My sources say no","Yes definitely","Cannot predict now",	"Outlook not so good","You may rely on it","Concentrate and ask again",	"Very doubtful","As I see it, yes","Most likely","Outlook good","Yes","Signs point to yes"];
-    // @ts-expect-error
-    let questionString = interaction.options.getString("question", true);
+    const option = interaction.options as CommandInteractionOptionResolver;
+    let questionString = option.getString("question", true);
     function generateResponse() {
         let arrayNumber = Math.floor(Math.random()*20);
         return responses[arrayNumber]

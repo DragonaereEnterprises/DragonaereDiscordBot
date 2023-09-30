@@ -1,4 +1,4 @@
-import { CommandInteraction, Client } from "discord.js";
+import { CommandInteraction, Client, TextBasedChannel } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
 import { EmbedMessage, EmbedError, EmbedDefaultError } from "../../components/Embed";
@@ -21,11 +21,13 @@ export const Purge: Command = {
     },
   ],
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {
+    const channel = interaction.channel as TextBasedChannel;
+    if (!channel.isDMBased) return
     if (!interaction.isChatInputCommand()) return
     const amount = interaction.options.getInteger('number', true)
     if (amount > 100) 
       return reacord.ephemeralReply(interaction, <EmbedError description="You can only purge 100 messages at a time." />);
-    const messages = await interaction.channel?.messages.fetch({ 
+    const messages = await channel.messages.fetch({ 
         limit: amount + 1,
     });
     const filtered = messages?.filter(
@@ -34,7 +36,7 @@ export const Purge: Command = {
     if (filtered === undefined)
       return reacord.ephemeralReply(interaction, <EmbedDefaultError />);
     reacord.ephemeralReply(interaction, <EmbedMessage title="Purge" description={`Purged ${filtered.size - 1} messages.`} />);
-    // @ts-expect-error
-    await interaction.channel?.bulkDelete(filtered);
+    // @ts-ignore
+    await channel.bulkDelete(filtered);
   },
 };
