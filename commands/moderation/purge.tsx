@@ -8,7 +8,7 @@ import ms from "ms";
 export const Purge: Command = {
   adminOnly: true,
   ownerOnly: false,
-  category: "moderation",
+  category: 2,
   name: 'purge',
   description: 'Clear the chat of a defined ammount of messages',
   options: [

@@ -7,7 +7,7 @@ import React from "react";
 export const EightBall: Command = {
   adminOnly: false,
   ownerOnly: false,
-  category: "fun",
+  category: 3,
   name: '8ball',
   description: 'Ask the 8Ball a question',
   options: [

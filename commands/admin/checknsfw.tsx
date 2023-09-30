@@ -7,7 +7,7 @@ import React from "react"
 export const CheckNSFW: Command = {
   adminOnly: true,
   ownerOnly: false,
-  category: "admin",
+  category: 1,
   name: 'checknsfw',
   description: 'Check the Servers NSFW Level',
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {

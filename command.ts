@@ -2,7 +2,7 @@ import { CommandInteraction, ChatInputApplicationCommandData, Client } from "dis
 import { ReacordDiscordJs } from "reacord";
 
 export interface Command extends ChatInputApplicationCommandData {
-  category: string;
+  category: number;
   adminOnly: boolean;
   ownerOnly: boolean;
   run: (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => void;

@@ -7,7 +7,7 @@ import React from "react";
 export const CoinFlip: Command = {
   adminOnly: false,
   ownerOnly: false,
-  category: "fun",
+  category: 3,
   name: 'coinflip',
   description: 'Flip a coin',
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {

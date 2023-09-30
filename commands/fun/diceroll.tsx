@@ -7,7 +7,7 @@ import React from "react";
 export const DiceRoll: Command = {
   adminOnly: false,
   ownerOnly: false,
-  category: "fun",
+  category: 3,
   name: 'diceroll',
   description: 'Roll a Die',
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {

@@ -11,7 +11,7 @@ function turnBotOff(){
 export const ShutDown: Command = {
   adminOnly: false,
   ownerOnly: true,
-  category: "botowner",
+  category: 0,
   name: 'shutdown',
   description: 'Shuts the bot down',
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {
