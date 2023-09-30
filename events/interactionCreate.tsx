@@ -26,10 +26,14 @@ const handleSlashCommand = async (client: Client, interaction: CommandInteractio
     reacord.ephemeralReply(interaction, <EmbedError description="You must be a member of this server" />);
     return;
   }
-  if (slashCommand.ownerOnly === true && interaction.user.id != process.env.OWNER_ID)
+  if (slashCommand.ownerOnly === true && interaction.user.id != process.env.OWNER_ID){
     reacord.ephemeralReply(interaction, <EmbedError description="You must be the Bot Owner to run this Command" />);
-  if (slashCommand.adminOnly === true && !member.permissions.has(PermissionsBitField.Flags.Administrator))
+    return;
+  }
+  if (slashCommand.adminOnly === true && !member.permissions.has(PermissionsBitField.Flags.Administrator)){
     reacord.ephemeralReply(interaction, <EmbedError description="You must be a Server Admin to run this Command" />);
+    return;
+  }
 
   slashCommand.run(client, interaction, reacord);
 };
