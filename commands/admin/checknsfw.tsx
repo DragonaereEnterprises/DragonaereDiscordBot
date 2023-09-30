@@ -1,6 +1,7 @@
 import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
+import { EmbedMessage } from "../../components/Embed";
 import React from "react"
 
 export const CheckNSFW: Command = {
@@ -14,7 +15,6 @@ export const CheckNSFW: Command = {
     const nsfwLevelName = ["Default", "Explicit", "Safe", "Age Restricted"];
     if (nsfwLevel === undefined)
       return reacord.ephemeralReply(interaction, <p>An Error has Occured</p>);
-
-    reacord.ephemeralReply(interaction, <p>NSFW Level: ${nsfwLevelName[nsfwLevel]}</p>);
+    reacord.ephemeralReply(interaction, <EmbedMessage title="NSFW Level" description={nsfwLevelName[nsfwLevel]} />);
   },
 };

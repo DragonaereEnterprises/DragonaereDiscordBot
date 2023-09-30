@@ -1,6 +1,7 @@
 import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
+import { EmbedMessage } from "../../components/Embed";
 import React from "react";
 
 export const EightBall: Command = {
@@ -26,6 +27,6 @@ export const EightBall: Command = {
         let arrayNumber = Math.floor(Math.random()*20);
         return responses[arrayNumber]
     }
-    reacord.reply(interaction, <p>**Question:** ${questionString}<br />**Answer:** ${generateResponse()}`</p>);
+    reacord.reply(interaction, <EmbedMessage title="8 Ball" description={`**Question:** ${questionString}\n**Answer:** ${generateResponse()}`} />);
   },
 };

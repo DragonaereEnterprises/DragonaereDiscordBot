@@ -1,6 +1,7 @@
 import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
+import { EmbedMessage } from "../../components/Embed";
 import React from "react";
 
 export const CoinFlip: Command = {
@@ -19,6 +20,6 @@ export const CoinFlip: Command = {
         return 'Tails'
       }
     }
-    reacord.reply(interaction, <p>**${generateResponse()}**</p>);
+    reacord.reply(interaction, <EmbedMessage title="Coin Flip" description={generateResponse()} />);
   }
 };

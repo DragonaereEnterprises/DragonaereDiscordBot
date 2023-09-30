@@ -1,7 +1,12 @@
 import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
+import { EmbedMessage } from "../../components/Embed";
 import React from "react";
+
+function turnBotOff(){
+  process.exit(100);
+}
 
 export const ShutDown: Command = {
   adminOnly: false,
@@ -10,8 +15,7 @@ export const ShutDown: Command = {
   name: 'shutdown',
   description: 'Shuts the bot down',
   run: async (client: Client, interaction: CommandInteraction, reacord: ReacordDiscordJs) => {
-    reacord.ephemeralReply(interaction, <p>Shutting Down...</p>);
-    setTimeout(function(){return},3000);
-    process.exit(0);
+    reacord.ephemeralReply(interaction, <EmbedMessage title="Shutting Down" description="Have a good day" />);
+    setTimeout(turnBotOff,1000);
   },
 };

@@ -1,6 +1,7 @@
-import { CommandInteraction, Client } from "discord.js";
+import { CommandInteraction, Client, EmbedBuilder } from "discord.js";
 import { Command } from "../../command";
 import { ReacordDiscordJs } from "reacord";
+import { EmbedMessage } from "../../components/Embed";
 import React from "react";
 
 export const DiceRoll: Command = {
@@ -14,6 +15,6 @@ export const DiceRoll: Command = {
       let numberReturned = Math.floor(Math.random() * 6) + 1;
       return numberReturned;
     }
-    reacord.reply(interaction, <p>**${generateResponse()}**</p>);
+    reacord.reply(interaction, <EmbedMessage title="Dice Roll" description={generateResponse()} />);
   },
 };
