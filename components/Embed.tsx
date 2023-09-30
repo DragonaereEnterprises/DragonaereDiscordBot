@@ -2,7 +2,7 @@ import { Embed, EmbedFooterProps, EmbedProps, EmbedThumbnailProps } from "reacor
 import React from "react"
 
 
-export function EmbedMessage({title, description, url, thumbnail, footer}: {title: string, description?: string, url?: string | undefined, thumbnail?: {url: string} | undefined, footer?: {text: string, iconUrl: string | undefined}| undefined }) {
+export function EmbedMessage({title, description, url, thumbnail, footer}: {title?: string, description?: string, url?: string | undefined, thumbnail?: {url: string} | undefined, footer?: {text: string, iconUrl: string | undefined}| undefined }) {
 	return (
 		<Embed
 			title={title}

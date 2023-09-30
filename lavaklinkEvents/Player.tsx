@@ -16,7 +16,6 @@ export function PlayerEvents(client:BotClient, reacord: ReacordDiscordJs, lavali
     console.log(player.guildId, " :: Player got Destroyed :: ");
     const channel = client.channels.cache.get(player.textChannelId!) as TextChannel;
     if(!channel) return console.log("No Channel?", player);
-    reacord.send(channel.id, <EmbedError title="Player Destoryed" description={`Reason: ${reason || "Unknown"}`} />);
   }).on("playerDisconnect", (player, voiceChannelId) => {
     console.log(player.guildId, " :: Player disconnected the Voice Channel :: ", voiceChannelId);
   }).on("playerMove", (player, oldVoiceChannelId, newVoiceChannelId) => {
@@ -34,17 +33,16 @@ export function PlayerEvents(client:BotClient, reacord: ReacordDiscordJs, lavali
     const url = track.info.artworkUrl || track.pluginInfo?.artworkUrl as string
     if(!channel) return;
     reacord.send(channel.id, <EmbedMessage 
-      title={`🎶 ${track.info.title}`.substring(0, 256)} 
+      title={`${track.info.title}`.substring(0, 256)} 
       url={track.info.uri}
-      thumbnail={{url}}
+      thumbnail={{url} || undefined}
       description={[
         `> - **Author:** ${track.info.author}`,
         `> - **Duration:** ${formatMS_HHMMSS(track.info.duration)} | Ends <t:${Math.floor((Date.now() + track.info.duration) / 1000)}:R>`,
         `> - **Source:** ${track.info.sourceName}`,
         `> - **Requester:** <@${(track.requester as CustomRequester).id}>`,
         track.pluginInfo?.clientData?.fromAutoplay ? `> *From Autoplay* ✅` : undefined
-      ].filter(v => typeof v === "string" && v.length).join("\n").substring(0, 4096)}
-      footer={{"text":`Requested by ${(track.requester as CustomRequester).username}`, iconUrl: (track.requester as CustomRequester).avatar}} />)
+      ].filter(v => typeof v === "string" && v.length).join("\n").substring(0, 4096)} />)
 
 
 

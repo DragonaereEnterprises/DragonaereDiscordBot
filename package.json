@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "cd lavalink && pm2 start --name Lavalink --max-memory-restart 4G java -- -jar Lavalink.jar",
     "start": "ts-node index.tsx"
   },
   "keywords": [],
@@ -18,6 +19,7 @@
     "firebase": "^10.3.1",
     "firebase-admin": "^11.10.1",
     "lavalink-client": "^1.1.21",
+    "pm2": "^5.3.0",
     "reacord": "^0.5.2",
     "react": "^18.2.0",
     "ts-node": "^10.9.1",
